@@ -17,7 +17,7 @@
     </script>
     <style>
       /* http://qfox.nl/notes/333 */
-      body,html,iframe{margin:0;padding:0;border:0;width:100%;height:100%}
+      body,html,iframe{margin:0;padding:0;border:0;width:100%;height:100%;background:#3d43c6;}
       iframe{position:absolute;top:0;left:0;padding-top:50px;box-sizing:border-box}
       header{position:relative;z-index:1;height:47px;padding-top:2px;border-bottom:1px solid #000;box-shadow:0 -10px 25px #ccc inset;background-color:#eee}
       aside,div,h1,p{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;font-size:16px;font-weight:inherit;line-height:22px;padding:0;margin:0;cursor:default}
@@ -112,24 +112,26 @@
       // true enables webgl shim (exposes `g`), false enables canvas shim (exposes `c`)
       var TOKEN_WEBGL = false;
       // px, 0 means always 100%
-      var TOKEN_MAX_WIDTH = 0;
+      var TOKEN_MAX_WIDTH = 1024;
       // px, 0 means always 100%
-      var TOKEN_MAX_HEIGHT = 0;
+      var TOKEN_MAX_HEIGHT = 768;
       // should the size be smaller than specified if viewport is smaller?
       var TOKEN_MAX_100P = true;
       // only if width<100%
-      var TOKEN_CENTER_CANVAS = false;
+      var TOKEN_CENTER_CANVAS = true;
       // "press" reload button on orientation change?
       var TOKEN_RELOAD_ONORIENTATIONCHANGE = true;
     </script>
     <script type="demo">
       // THIS IS WHERE YOUR DEMO GOES
       // tricks: https://www.youtube.com/watch?v=RTxtiLp1C8Y
+      // TODO
       // save differencies instead of absolute positions??
-
+      // store vortexs in a big string '20432937'
+ 
+      debugger;
       let ctx = window.c;
-      const np = 38;
-      const ns = 50;
+      const np = 38, ns = 50;
       const h = [
       [{x: 20, y: 43},
       {x: 29, y: 37},
@@ -207,8 +209,7 @@
       {x: 31, y: 37},
       {x: 31, y: 37},
       {x: 31, y: 37},
-      {x: 31, y: 37}
-      ],
+      {x: 31, y: 37}],
         
       [{x: 12, y: 63},
       {x: 11, y: 61},
@@ -366,40 +367,41 @@
       {x: 34, y: 69},
       {x: 32, y: 68}]
       ];
-      let f = [];
-      let a = [];
-
+      let f = [], a = [];
       for (let i = 1; i <= h.length - 1; i++) {
         let m = h[i-1];
         for (let j = 0; j < ns; j++) {
           f[j] = h[i].map((v, k) => {
-            const sx = (v.x - m[k].x) / ns;
-            const sy = (v.y - m[k].y) / ns;
+            sx = (v.x - m[k].x) / ns, sy = (v.y - m[k].y) / ns;
             return {x: m[k].x + sx * j, y: m[k].y + sy * j};
           });
         }
         a = a.concat(f);
       }
-      let x = 0;
+      let x = 0, st = false;
       (function render() {
         if (x <= a.length - 1) {
           const f = a[x];
           ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
           for(let i = 0; i < np - 1; i++) {
-            ctx.strokeStyle = "black";
+            ctx.strokeStyle = "white";
             ctx.beginPath();
-            ctx.moveTo(f[i].x * 4, f[i].y * 4);
-            ctx.lineTo(f[i+1].x * 4, f[i+1].y * 4);
+            ctx.moveTo(f[i].x * 4 + 600, f[i].y * 4);
+            ctx.lineTo(f[i+1].x * 4 + 600, f[i+1].y * 4);
+            ctx.lineWidth = 2;
             ctx.stroke();
+            if (x > 220) {
+              ctx.font = "bold 140px Arial";
+              ctx.fillText("evolution     k", 0, 320);
+            }
           }
+          let p = x%50 == 0 ? 1000 : 0;
           x++;
           setTimeout(function() {
             render();
-          }, 50);
+          }, 50 + p);
         }
       }());
-      document.write('see console');
-      console.log('demo here', window.a, b, window.c, window.g, window.d);
       // END
     </script>
     <script>
