@@ -7,11 +7,11 @@
   -->
   <head>
     <meta charset="utf-8">
-    <title>JS1k 2017 - NNNN - TITLE</title>
+    <title>JS1k 2017 - 1kvolution - 1kVOLUTION</title>
     <meta name="author" content="YOU">
     <link rel="icon" type="image/png" href="http://js1k.com/favicon.png">
-    <link rel="canonical" href="http://js1k.com/2017-magic/demo/NNNN">
-    <link rel="shortlink" href="http://js1k.com/NNNN">
+    <link rel="canonical" href="http://js1k.com/2017-magic/demo/1kvolution">
+    <link rel="shortlink" href="http://js1k.com/1kvolution">
     <script>
       // GA
     </script>
@@ -39,22 +39,22 @@
           <a href="http://js1k.com/2017-magic">2017</a>
           <strong></strong> demo
           &mdash;
-          "TITLE" by YOU
+          "1kvolution" by Eric Ros
         </h1>
         <p>
           <em>
-            FIRST PART OF YOUR DESC GOES HERE
+            The evolution of species in 1k
           </em>
         </p>
         <aside>
           &mdash;
           1024 bytes
           &mdash;
-          <a href="http://js1k.com/2017-magic/details/NNNN">demo details</a>
+          <a href="http://js1k.com/2017-magic/details/1kvolution">demo details</a>
           &mdash;
           <a href="http://js1k.com/2017-magic/demos">list of demos</a>
           &mdash;
-          <a href="http://js1k.com/1955" title="short link for your mobile devices" rel="nofollow">js1k.com/NNNN</a>
+          <a href="http://js1k.com/1955" title="short link for your mobile devices" rel="nofollow">js1k.com/1kvolution</a>
           <time datetime="NOW" pubdate>NOW</time>
         </aside>
       </div>
@@ -124,56 +124,59 @@
     </script>
     <script type="demo">
       // THIS IS WHERE YOUR DEMO GOES
-      // tricks: https://www.youtube.com/watch?v=RTxtiLp1C8Y
-      // TODO
-      // save differencies instead of absolute positions??
-      // STEPS:
-      // CALCULAR DIFERENCIAS DE 8 EN 8 O 16 Y 16
-      // CONVERTIR ESE STRING EN NUMEROS DE BASE-36
       c = window.c;
-      np = 38, ns = 50;
-      k = "204329373436403647354935493650374837434138443345274423432043184516441642213621342034203418352043204320432043204320432043204320432043204320432043204320433137333932493466397142694361476051625268517154725667567055734973476949654764447338752967284231373137313731373137313731373137313731373137313731373137313712631161205621573950464955495846614465406544575155535753585454555153395631613363366326632264126312631263126312631263126312631263126312631263126312631263035602540847164722474340554268477348674855465049486042624558455036562957276522652562255821561660135916571855145407550755075507550755075507550755075503560756085016452349474457345622472039283538372747175721603651475553566568736683637549665083438446814066326733872886308426692267178511851582176613580756075632683253305429572859255931493239343434323132312834233824392739303832413840454050405438664672487547814681457642733872377738812981307934783575346934693268";
-      h = [[], [], [], [], [], []];
+      p = 34, s = 60;
+      i = 7, t = '', v = "30kczlrf";
+      while(i--) {
+        t += v;
+      }
+      b = `30kfx3ny6kc0rlva${v+v+t}30kczm5351ata41m6fiimywq560tswwb${v+t}3nd4r1237pq6wz736tcee9cc7q6wbe8x4xhd8zzn3eftaewb${v+v+v+v+v}30kic3xi6l1a01be8eavimcb5c71d7bf8w36i2ep84w4z2jr4tmdsp2r41jommfv${v+v+v}30kfc2q64nxir77a8cr01a1sa4kdwk06a4u6b8268mckjeto743ef2zr798ervyu524c70q831kqd5ph2wugcglk3wtelqdo6182856u7245t5057cjkfnig8a2zkl2t7038jb6k6ckj2hg45fuw77d861rxcaut`;
+      a = [];
+      
+      do a.push(parseInt(b.substr(0, 8), 36));  while (b = b.substring(8, b.length));
+      k = a.join('');
+      
+      h = [];
       for (i = 0; i < 6; i++) {
-        for(j = 0; j < np * 4; j += 4) {
-          h[i].push({x: +(k[i*np*4+j] + k[i*np*4+j+1]), y: +(k[i*np*4+j+2] + k[i*np*4+j+3])});
+        h.push([]);
+        for(j = 0; j < 136; j += 4) {
+          b=i*p*4+j;
+          h[i].push({x: +(k[b] + k[b+1]), y: +(k[b+2] + k[b+3])})
         }
       }
       f = [], a = [];
-      for (i = 1; i <= h.length - 1; i++) {
+
+      for (i = 1; i < 6; i++) {
         m = h[i-1];
-        for (j = 0; j < ns; j++) {
-          f[j] = h[i].map((v, k) => {
-            sx = (v.x - m[k].x) / ns, sy = (v.y - m[k].y) / ns;
-            return {x: m[k].x + sx * j, y: m[k].y + sy * j};
-          });
+        j=s;
+        while(j--) {
+          q=j/s;
+          f[j] = h[i].map((v, k) => ({x: m[k].x*(1-q)+v.x*q,y: m[k].y*(1-q)+v.y*q}))
         }
-        a = a.concat(f);
+        a = a.concat(f)
       }
-      x = 0, st = false;
+      
+      x = 0;
       (function r() {
-        if (x <= a.length - 1) {
-           f = a[x];
-          c.clearRect(0, 0, window.innerWidth, window.innerHeight);
-          for(i = 0; i < np - 1; i++) {
-            c.strokeStyle = "white";
+        if (x < 300) {
+          f = a[x];
+          c.clearRect(0, 0, 2E3, 2E3);
+          i=33;
+          while(i--) {
             c.beginPath();
-            c.moveTo(f[i].x * 4 + 600, f[i].y * 4);
-            c.lineTo(f[i+1].x * 4 + 600, f[i+1].y * 4);
-            c.lineWidth = 2;
+            c.moveTo(f[i].x * 4, f[i].y * 4);
+            c.lineTo(f[i+1].x * 4, f[i+1].y * 4);
             c.stroke();
-            if (x > 220) {
-              c.font = "bold 140px Arial";
-              c.fillText("evolution     k", 0, 320);
+            if (x > 280) {
+              c.font = "150px Arial";
+              c.fillText("kvolution", 260, 350)
             }
           }
-          p = x%50 == 0 ? 1000 : 0;
           x++;
-          setTimeout(function() {
-            r();
-          }, 50 + p);
+          //setTimeout(r, x%59 == 0 ? 999 :50)
+          setTimeout(r, 50)
         }
-      }()); 
+      }())
       // END
     </script>
     <script>
